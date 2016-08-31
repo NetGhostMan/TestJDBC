@@ -9,22 +9,54 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
+import TestJDBC.Tool.DBTool;
+
 public class TestJDBC {
-	
+
 	static String DB_URL = "jdbc:mysql://localhost:3306/TestJDBC?useSSL=false";
-	static final String DRIVER = "com.mysql.jdbc.Driver"; 
-	static final String USER = "root"; 
-	static final String PASSWORD = "Huzh1x1ang";
-	
+	static final String DRIVER = "com.mysql.jdbc.Driver";
+	static final String USER = "root";
+	// static final String PASSWORD = "Huzh1x1ang";
+	static final String PASSWORD = "PaSSw0rd";
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Set<String> users = new HashSet<String>();
-		for(int i = 0;i<10; i++){
-			users.add("huzhixiang" + i);
-		}
-		inrest(users);
+//		Set<String> users = new HashSet<String>();
+//		for (int i = 0; i < 10; i++) {
+//			users.add("huzhixiang" + i);
+//		}
+//		inrest(users);
+		inrest(new User("ZhangSan","123456",100));
+		inrest(new User("LiSi","123456",0));
+		
 		helloworld();
 		chaixunfei();
+
+	}
+
+	private static void inrest(User user) {
+		// TODO Auto-generated method stub
+		Connection connection = DBTool.openConn();
+		PreparedStatement preparedStatement = null;
+		try {
+			preparedStatement = connection.prepareStatement(
+					"INSERT INTO 'user'('username','password', 'account') VALUES (?,?,?)");
+			preparedStatement.setString(1,user.getUsername());
+			preparedStatement.setString(2,user.getPassword());
+			preparedStatement.setInt(3,user.getAccount());
+			preparedStatement.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				preparedStatement.close();
+				DBTool.closeConn(connection);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
@@ -32,26 +64,26 @@ public class TestJDBC {
 		// TODO Auto-generated method stub
 		Connection connection = null;
 		Statement statement = null;
-		
+
 		try {
 			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		try {
 			connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 			statement = connection.createStatement();
-			for(String user:users){
-				statement.addBatch("insert into user(username) values ('"+user+"')");
+			for (String user : users) {
+				statement.addBatch("insert into user(username) values ('" + user + "')");
 			}
 			statement.executeBatch();
 			statement.clearBatch();
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				statement.close();
 				connection.close();
@@ -61,7 +93,7 @@ public class TestJDBC {
 			}
 
 		}
-		
+
 	}
 
 	private static void chaixunfei() {
@@ -75,21 +107,21 @@ public class TestJDBC {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		DB_URL = DB_URL + "&useCursorFetch=true";
 		try {
-			connection = DriverManager.getConnection(DB_URL,USER,PASSWORD);
+			connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 			preparedStatement = connection.prepareStatement("select * from user");
 			preparedStatement.setFetchSize(5);
 			resultSet = preparedStatement.executeQuery();
-			
-			while(resultSet.next()){
-				System.out.println("hello"+ resultSet.getString("username"));
+
+			while (resultSet.next()) {
+				System.out.println("hello" + resultSet.getString("username"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				resultSet.close();
 				preparedStatement.close();
@@ -98,7 +130,7 @@ public class TestJDBC {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 
@@ -107,7 +139,7 @@ public class TestJDBC {
 		Connection connection = null;
 		Statement statement = null;
 		ResultSet resultSet = null;
-		
+
 		try {
 			Class.forName(DRIVER);
 		} catch (ClassNotFoundException e) {
@@ -115,20 +147,20 @@ public class TestJDBC {
 			System.out.println("类没写对");
 			e.printStackTrace();
 		}
-		
+
 		try {
-			connection = DriverManager.getConnection(DB_URL,USER,PASSWORD);
-			
+			connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from user");
-			while(resultSet.next()){
-				System.out.println("hello"+resultSet.getString("username"));
+			while (resultSet.next()) {
+				System.out.println("hello" + resultSet.getString("username"));
 			}
-			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				resultSet.close();
 				statement.close();
@@ -137,10 +169,9 @@ public class TestJDBC {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
-		
-		
+
 	}
 
 }
