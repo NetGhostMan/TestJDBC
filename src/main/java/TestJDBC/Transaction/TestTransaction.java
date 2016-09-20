@@ -5,8 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 
-import TestJDBC.JDBC.TestJDBC;
-import TestJDBC.Tool.DBTool; 
+import TestJDBC.Tool.DBTool;
+import testJDBC.JDBC.TestJDBC; 
 
 public class TestTransaction {
 

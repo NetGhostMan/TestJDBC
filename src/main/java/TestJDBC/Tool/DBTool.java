@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBTool {
-	static String DB_URL = "jdbc:mysql://localhost:3306/TestServlet?useSSL=false";
+	static String DB_URL = "jdbc:mysql://localhost:3306/TestJDBC?useSSL=false";
 	// static String DB_URL =
 	// "jdbc:mysql://localhost:3306/TestJDBC?useSSL=false";
 	static final String DRIVER = "com.mysql.jdbc.Driver";
@@ -28,6 +28,7 @@ public class DBTool {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("没获取到conn");
 		}
 		return connection;
 	}

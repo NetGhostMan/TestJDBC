@@ -15,12 +15,35 @@ CREATE TABLE `TestJDBC`.`user` (
   
   
   
-  CREATE TABLE 'Product' (
-  'Id' INT NOT NULL AUTO_INCREMENT,
-  'ProductName' VARCHAR(100),
-  'Inventory' INT,
-  PRIMARY KEY ('Id'));
+  CREATE TABLE `Product` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `ProductName` VARCHAR(100),
+  `Inventory` INT,
+  PRIMARY KEY (`Id`));
 
-  INSERT INTO 'Product' ( 'ProductName', 'Inventory') VALUES ('bread','11');
-  INSERT INTO 'Product' ( 'ProductName', 'Inventory') VALUES ('milk','8');
+  INSERT INTO `Product` ( `ProductName`, `Inventory`) VALUES ('bread','11');
+  INSERT INTO `Product` ( `ProductName`, `Inventory`) VALUES ('milk','8');
+  
+  
+  CREATE TABLE `TestJDBC`.`student` (
+  `Id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NULL,
+  `number` INT NULL,
+  PRIMARY KEY (`Id`));
+  
+  INSERT INTO `TestJDBC`.`student` ( `name`, `number`) VALUES ('XiaoMing',100);
+  INSERT INTO `TestJDBC`.`student` ( `name`, `number`) VALUES ('XiaoLi',101);
+  INSERT INTO `TestJDBC`.`student` ( `name`, `number`) VALUES ('XiaoZhao',102);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   

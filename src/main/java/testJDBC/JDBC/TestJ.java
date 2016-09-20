@@ -1,4 +1,4 @@
-package TestJDBC.JDBC;
+package testJDBC.JDBC;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,10 +12,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.dbcp2.BasicDataSource;
+
+import com.chesstop.edison.DoAddPassword;
+
+import TestJDBC.Bean.User;
+import TestJDBC.Tool.DBTool;
 
 public class TestJ {
 
@@ -40,7 +44,44 @@ public class TestJ {
 		// j.intobatch(users);
 
 		// j.seclct();
-		j.test1();
+//		j.test1();
+		
+		User user = new User("edison","Zhunxiao",12);
+		
+		j.seclct();
+		
+	}
+
+	private void addUser(User user) {
+		String sql = "insert into user(username,password) values(?,?)";
+		connection = DBTool.openConn();
+		try {
+			preparedStatement = connection.prepareStatement(sql);
+			System.out.println("获取conn");
+			String username = user.getUsername();
+			preparedStatement.setString(1, username);
+			System.out.println("设置String");
+			String password = user.getPassword();
+			DoAddPassword addPassword = new DoAddPassword();
+			password = addPassword.setPssword(password);
+			preparedStatement.setString(2, password);
+			System.out.println("设置密码");
+			preparedStatement.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("这里出错");
+		} finally {
+			try {
+				if (statement != null)
+					preparedStatement.close();
+				if (connection != null)
+					connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void intobatch(Set<String> users) {
@@ -90,7 +131,7 @@ public class TestJ {
 		basicDataSource.setUrl(DB_URL);
 		basicDataSource.setUsername(USER);
 		basicDataSource.setPassword(PASSWORD);
-		
+
 		String sql = " select * from Product where Id = ?";
 		try {
 			Class.forName(DRIVER);
@@ -123,8 +164,7 @@ public class TestJ {
 					preparedStatement.close();
 				if (connection != null)
 					connection.close();
-				
-		
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -136,7 +176,7 @@ public class TestJ {
 	private void seclct() {
 		DB_URL += "&useCursorFetch=true";
 
-		String sql = " select * from user";
+		String sql = " select * from user where username = ?";
 
 		try {
 			Class.forName(DRIVER);
@@ -148,6 +188,7 @@ public class TestJ {
 		try {
 			connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
 			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, "edison");
 			preparedStatement.setFetchSize(1);
 			resultSet = preparedStatement.executeQuery();
 
@@ -163,7 +204,11 @@ public class TestJ {
 					outputStream.write(i);
 				}
 				String string = resultSet.getString("username");
+				String password = resultSet.getString("password");
+				DoAddPassword addPassword = new DoAddPassword();
+				password = addPassword.getPassword(password);
 				System.out.println("username : " + string);
+				System.out.println("password : " + password);
 			}
 			if (inputStream != null)
 				inputStream.close();
