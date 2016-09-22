@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="testJDBC.mybatis.test.Op">
+	<select id="getProduct" parameterType="int" resultMap="product">
+		select *
+		from Product where ID = #{id};
+	</select>
+	<resultMap id="product" type="testJDBC.mybatis.test.Product">
+		<constructor>
+			<idArg column="ID" javaType="int" />
+			<arg column="ProductName" javaType="String" />
+			<arg column="Catalog" javaType="String" />
+		</constructor>
+	</resultMap>
+	
+	<select id="getUser" parameterType="int" resultMap="user">
+	SELECT
+	u.ID AS UserId,UserName,Tel,p.ID AS ProductId FROM User u LEFT JOIN transaction up on u.ID =
+	up.UserId LEFT JOIN Product p on p.ID = up.ProductId WHERE u.ID=#{id};
+	</select>
+	
+	<resultMap type="testJDBC.mybatis.test.User" id="user">
+		<constructor>
+			<idArg column="UserID" javaType="int"/>
+			<arg column="UserName" javaType="String"/>
+			<arg column="Tel" javaType="String"/>
+		</constructor>
+		<collection property="products" ofType="Integer">
+			<id property="id" column="ProductID"/>
+		</collection>
+	</resultMap>
+</mapper>

@@ -41,9 +41,56 @@ CREATE TABLE `TestJDBC`.`user` (
   
   
   
+  --建表语句
   
+  CREATE TABLE `Product` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `ProductName` VARCHAR(45) NULL,
+  `Catalog` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID`));
+  CREATE TABLE `User` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `UserName` VARCHAR(45) NULL,
+  `Tel` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID`));
+  CREATE TABLE `transaction` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `UserId` INT NOT NULL,
+  `ProductId` INT NOT NULL,
+  PRIMARY KEY (`ID`));
   
-  
-  
+  --测试数据
+   INSERT INTO `Product` ( `ProductName`, `Catalog`) VALUES ('shu','haowangdeshu');
+   INSERT INTO `Product` ( `ProductName`, `Catalog`) VALUES ('hua','haokandehua');
+   INSERT INTO `User` ( `UserName`, `Tel`) VALUES ('Zhang','123123123');
+   INSERT INTO `User` ( `UserName`, `Tel`) VALUES ('Wang','234234234');
+   INSERT INTO `transaction` ( `UserId`, `ProductId`) VALUES (1,2);
+   INSERT INTO `transaction` ( `UserId`, `ProductId`) VALUES (1,1);
+   INSERT INTO `transaction` ( `UserId`, `ProductId`) VALUES (2,1);
+   INSERT INTO `transaction` ( `UserId`, `ProductId`) VALUES (2,2);
+   
+   
+   
+ SELECT u.ID AS UserId,
+ 
+ UserName,ProductName,Tel,
+ 
+ p.ID AS ProductId 
+ 
+ FROM
+ 
+ User u LEFT JOIN transaction up on u.ID = up.UserId
+ 
+ left join 
+ 
+ Product p on 
+ 
+ p.ID = up.ProductId
+ 
+ WHERE u.ID=2;
+   
+ 
+ 
+
   
   
