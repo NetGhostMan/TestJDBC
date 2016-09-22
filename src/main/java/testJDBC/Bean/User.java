@@ -1,4 +1,4 @@
-package TestJDBC.Bean;
+package testJDBC.Bean;
 
 public class User {
 

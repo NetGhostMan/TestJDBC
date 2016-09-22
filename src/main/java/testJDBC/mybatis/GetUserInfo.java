@@ -1,6 +1,6 @@
-package TestJDBC.Mybatis;
+package testJDBC.mybatis;
 
-import TestJDBC.Bean.User;
+import testJDBC.Bean.User;
 
 public interface GetUserInfo {
 	public User getUser(int id);

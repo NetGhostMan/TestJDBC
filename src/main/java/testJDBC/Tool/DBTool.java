@@ -1,4 +1,4 @@
-package TestJDBC.Tool;
+package testJDBC.Tool;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

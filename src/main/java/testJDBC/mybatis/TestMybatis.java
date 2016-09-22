@@ -1,4 +1,4 @@
-package TestJDBC.Mybatis;
+package testJDBC.mybatis;
 
 import java.io.InputStream;
 
@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import TestJDBC.Bean.User;
+import testJDBC.Bean.User;
 
 public class TestMybatis {
 
