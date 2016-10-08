@@ -90,7 +90,28 @@ CREATE TABLE `TestJDBC`.`user` (
  WHERE u.ID=2;
    
  
+ --建表语句
  
-
+--事务测试，建表语句：
+CREATE TABLE `Inventory` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `ProductName` VARCHAR(45) NULL,
+  `Inventory` INT NULL,
+  PRIMARY KEY (`ID`));
+CREATE TABLE `Order` (
+  `ID` INT NOT NULL AUTO_INCREMENT,
+  `buyer` VARCHAR(45) NULL,
+  `ProductName` VARCHAR(45) NULL,
+  PRIMARY KEY (`ID`));
+  
+  --数据
+  
+  INSERT INTO `Inventory` ( `ProductName`, `Inventory`) VALUES ('bag',20);
+  INSERT INTO `Inventory` ( `ProductName`, `Inventory`) VALUES ('watch',25);
+ --业务
+ SELECT `Inventory` FROM `Inventory` WHERE `ProductName` = 'bag';
+ UPDATE `Inventory` SET `Inventory`=12 WHERE `ProductName` = 'bag';
+ INSERT INTO `Order` ( `buyer`, `ProductName`) VALUES ('zhangshan','bag');
+ 
   
   
