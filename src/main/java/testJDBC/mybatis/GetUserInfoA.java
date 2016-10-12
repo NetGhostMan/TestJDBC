@@ -1,8 +1,8 @@
-package TestJDBC.Mybatis;
+package testJDBC.mybatis;
 
 import org.apache.ibatis.annotations.Select;
 
-import TestJDBC.Bean.User;
+import testJDBC.Bean.User;
 
 public interface GetUserInfoA {
 

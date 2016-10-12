@@ -1,11 +1,11 @@
-package TestJDBC.Transaction;
+package testJDBC.Transaction;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Savepoint;
 
-import TestJDBC.Tool.DBTool;
+import testJDBC.Tool.DBTool;
 import testJDBC.JDBC.TestJDBC; 
 
 public class TestTransaction {

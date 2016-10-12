@@ -16,10 +16,10 @@ import java.util.Set;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
-import com.chesstop.edison.DoAddPassword;
+//import com.chesstop.edison.DoAddPassword;
 
-import TestJDBC.Bean.User;
-import TestJDBC.Tool.DBTool;
+import testJDBC.Bean.User;
+import testJDBC.Tool.DBTool;
 
 public class TestJ {
 
@@ -62,8 +62,8 @@ public class TestJ {
 			preparedStatement.setString(1, username);
 			System.out.println("设置String");
 			String password = user.getPassword();
-			DoAddPassword addPassword = new DoAddPassword();
-			password = addPassword.setPssword(password);
+			//DoAddPassword addPassword = new DoAddPassword();
+			//password = addPassword.setPssword(password);
 			preparedStatement.setString(2, password);
 			System.out.println("设置密码");
 			preparedStatement.executeUpdate();
@@ -205,8 +205,8 @@ public class TestJ {
 				}
 				String string = resultSet.getString("username");
 				String password = resultSet.getString("password");
-				DoAddPassword addPassword = new DoAddPassword();
-				password = addPassword.getPassword(password);
+				//DoAddPassword addPassword = new DoAddPassword();
+				//password = addPassword.getPassword(password);
 				System.out.println("username : " + string);
 				System.out.println("password : " + password);
 			}

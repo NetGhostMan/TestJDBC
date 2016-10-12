@@ -16,9 +16,9 @@ public class Main {
 		SqlSession sqlSession = sqlSessionFactory.openSession(true);
 		try {
 			Op op = sqlSession.getMapper(Op.class);
-			Product product = op.getProduct(1);
+			Product product = op.getProduct(2);
 			System.out.println(product);
-			User user = op.getUser(1);
+			User user = op.getUser(2);
 			System.out.println(user);
 		} catch (Exception e) {
 			e.printStackTrace();

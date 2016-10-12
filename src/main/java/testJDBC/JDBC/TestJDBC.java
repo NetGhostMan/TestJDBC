@@ -9,8 +9,8 @@ import java.sql.Statement;
 import java.util.HashSet;
 import java.util.Set;
 
-import TestJDBC.Bean.User;
-import TestJDBC.Tool.DBTool;
+import testJDBC.Bean.User;
+import testJDBC.Tool.DBTool;
 
 public class TestJDBC {
 
