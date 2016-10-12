@@ -113,5 +113,21 @@ CREATE TABLE `Order` (
  UPDATE `Inventory` SET `Inventory`=12 WHERE `ProductName` = 'bag';
  INSERT INTO `Order` ( `buyer`, `ProductName`) VALUES ('zhangshan','bag');
  
+--考试题1 的建表语句：
+CREATE TABLE `Course` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `UserName` VARCHAR(100) NULL,
+  `CourseName` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`));
   
+  --数据
+  INSERT INTO `Course` ( `UserName`, `CourseName`) VALUES ('ZhangSan','shuxue');
+  INSERT INTO `Course` ( `UserName`, `CourseName`) VALUES ('ZhangSan','yuwen');
+  INSERT INTO `Course` ( `UserName`, `CourseName`) VALUES ('LiSi','yuwen');
+  INSERT INTO `Course` ( `UserName`, `CourseName`) VALUES ('LiSi','yuwen');
+  INSERT INTO `Course` ( `UserName`, `CourseName`) VALUES ('ZhangSan','math');
+  --查询
+  SELECT `CourseName` FROM `Course` WHERE `UserName` = 'ZhangSan';
+  
+  DELETE FROM `Course` WHERE `UserName` = 'LiSi' AND  `CourseName` = 'math';
   
